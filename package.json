@@ -37,5 +37,10 @@
   },
   "engines": {
     "node": ">=20.11.1"
-  }
+  },
+  "options": {
+  "outputPath": "dist/project-name",
+  "baseHref": "/"
+}
+
 }
