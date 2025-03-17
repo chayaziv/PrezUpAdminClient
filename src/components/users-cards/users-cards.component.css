@@ -12,9 +12,7 @@
     transition: transform 0.2s;
   }
   
-  .user-card:hover {
-    transform: scale(1.02);
-  }
+
   
   .user-avatar {
     display: flex;

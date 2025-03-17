@@ -9,6 +9,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UserFormComponent } from '../user-form/user-form.component';
 
 @Component({
   imports: [
@@ -58,8 +59,17 @@ export class ViewUsersComponent implements OnInit {
     });
   }
   onEdit(user: User) {
-    // פעולה לעריכת משתמש (לדוגמה, ניווט לעמוד עריכת משתמש)
-    console.log('Edit user', user);
+    const dialogRef = this.dialog.open(UserFormComponent, {
+      
+      data: { user, isEdit: true },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        console.log('User updated:', result);
+        // הוספת לוגיקה לעדכון המשתמש ברשימה
+      }
+    });
   }
   onDelete(user: User) {
     // פעולה למחיקה (לדוגמה, קריאה לשירות מחיקה)
