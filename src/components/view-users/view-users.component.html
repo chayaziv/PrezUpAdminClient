@@ -1,16 +1,51 @@
-<mat-toolbar color="primary">
-  <button mat-button (click)="toggleView()">
-    {{ displayAsCards ? "Switch to Table View" : "Switch to Card View" }}
-  </button>
+<mat-toolbar color="primary" class="toolbar">
+  <div class="summary-container">
+    <mat-icon class="summary-icon">group</mat-icon>
+    <span
+      >Total: <strong>{{ users.length }}</strong></span
+    >
+
+    <mat-icon class="summary-icon">verified_user</mat-icon>
+    <span
+      >Active: <strong>{{ getActiveUsersCount() }}</strong></span
+    >
+
+    <mat-icon class="summary-icon">update</mat-icon>
+    <span
+      >Last Updated: <strong>{{ lastUpdated | date : "short" }}</strong></span
+    >
+    <span class="spacer"></span>
+
+    <button
+      mat-fab
+      color="accent"
+      class="toggle-view-btn"
+      (click)="toggleView()"
+    >
+      <mat-icon>{{ displayAsCards ? "table_chart" : "view_module" }}</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>
+
+<div>
+  <mat-divider></mat-divider>
+</div>
 
 @if(displayAsCards) {
 <div>
-  <app-users-cards [users]="users"></app-users-cards>
+  <app-users-cards
+    [users]="users"
+    (userDeleted)="onDelete($event)"
+    (userEdited)="onEdit($event)"
+  ></app-users-cards>
 </div>
 
 } @if(!displayAsCards) {
 <div>
-  <app-users-table [users]="users"></app-users-table>
+  <app-users-table
+    [users]="users"
+    (userDeleted)="onDelete($event)"
+    (userEdited)="onEdit($event)"
+  ></app-users-table>
 </div>
 }

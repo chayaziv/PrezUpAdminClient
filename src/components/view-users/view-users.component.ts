@@ -3,11 +3,20 @@ import { User } from '../../models/user.model';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UsersTableComponent } from '../users-table/users-table.component';
 import { UserService } from '../../services/user.service';
-import { UsersCardsComponent } from "../users-cards/users-cards.component";
+import { UsersCardsComponent } from '../users-cards/users-cards.component';
+import { DatePipe } from '@angular/common';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-view-users',
-  imports: [MatToolbarModule,  UsersTableComponent, UsersCardsComponent],
+  imports: [
+    MatToolbarModule,
+    UsersTableComponent,
+    UsersCardsComponent,
+    DatePipe,
+    MatDividerModule,
+    MatIconModule,
+  ],
   templateUrl: './view-users.component.html',
   styleUrl: './view-users.component.css',
 })
@@ -25,10 +34,25 @@ export class ViewUsersComponent implements OnInit {
     this.userService.loadUsers();
     console.log(this.users);
   }
-
+  lastUpdated = new Date();
   displayAsCards = true; // משתנה שמווסת את התצוגה (כרטיסים או טבלה)
 
   toggleView() {
     this.displayAsCards = !this.displayAsCards;
+  }
+  getActiveUsersCount(): number {
+    return this.users.filter((user) => user.accountStatus === 'Active').length;
+  }
+  confirmDelete(user: User) {
+    
+
+  }
+  onEdit(user: User) {
+    // פעולה לעריכת משתמש (לדוגמה, ניווט לעמוד עריכת משתמש)
+    console.log('Edit user', user);
+  }
+  onDelete(user: User) {
+    // פעולה למחיקה (לדוגמה, קריאה לשירות מחיקה)
+    console.log('Delete user', user);
   }
 }
