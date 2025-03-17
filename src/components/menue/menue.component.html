@@ -1,9 +1,39 @@
-<button routerLink="/login">
+<!-- <button routerLink="/login">
   <span>login </span>
 </button>
 <button routerLink="/">
   <span>home </span>
 </button>
+
+<button routerLink="/users">
+  <span>users </span>
+</button>
+
 <button mat-menu-item (click)="logout()">
   <span>Logout</span>
-</button>
+</button> -->
+<mat-toolbar color="primary">
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <span>My App</span>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item routerLink="/login">
+    <mat-icon>login</mat-icon>
+    <span>Login</span>
+  </button>
+  <button mat-menu-item routerLink="/">
+    <mat-icon>home</mat-icon>
+    <span>Home</span>
+  </button>
+  <button mat-menu-item routerLink="/users">
+    <mat-icon>group</mat-icon>
+    <span>Users</span>
+  </button>
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>

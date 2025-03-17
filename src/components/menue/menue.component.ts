@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
+  imports: [RouterLink, MatToolbarModule, MatIconModule, MatMenuModule],
   selector: 'app-menue',
-  imports: [RouterLink],
   templateUrl: './menue.component.html',
   styleUrl: './menue.component.css',
 })
@@ -19,6 +22,6 @@ export class MenueComponent {
   }
   logout() {
     this.authService.logout();
-    this.router.navigate(['/home']);
+    this.router.navigate(['/']);
   }
 }

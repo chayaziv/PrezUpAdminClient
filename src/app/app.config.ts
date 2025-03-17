@@ -12,6 +12,7 @@ import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
+import { baseUrlInterceptor } from './interceptors/base-url.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,7 +22,7 @@ export const appConfig: ApplicationConfig = {
     // provideHttpClient(withInterceptors([authInterceptor])),
     provideHttpClient(
      
-      withInterceptors([authInterceptor])
+      withInterceptors([authInterceptor,baseUrlInterceptor])
     ),
   ],
 };

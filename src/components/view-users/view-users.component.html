@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+  <button mat-button (click)="toggleView()">
+    {{ displayAsCards ? "Switch to Table View" : "Switch to Card View" }}
+  </button>
+</mat-toolbar>
+
+@if(displayAsCards) {
+<div>
+  <app-users-cards [users]="users"></app-users-cards>
+</div>
+
+} @if(!displayAsCards) {
+<div>
+  <app-users-table [users]="users"></app-users-table>
+</div>
+}

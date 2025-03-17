@@ -14,12 +14,12 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) {}
 
   SignIn(user: loginUser) {
-    const response = this.http.post<any>(`/login`, {
+    const response = this.http.post<any>(`auth/login`, {
       ...user,
     });
     response.subscribe(
       (res) => {
-        if (res.token) {
+        if (res.data.token) {
           sessionStorage.setItem('token', res.data.token);
         }
         this.isAuthSubject.next(true);
@@ -30,7 +30,7 @@ export class AuthService {
     );
   }
   getToken(): string | null {
-    return sessionStorage.getItem('authToken');
+    return sessionStorage.getItem('token');
   }
 
   logout() {
