@@ -35,7 +35,7 @@
 <div>
   <app-users-cards
     [users]="users"
-    (userDeleted)="onDelete($event)"
+    (userDeleted)="confirmDelete($event)"
     (userEdited)="onEdit($event)"
   ></app-users-cards>
 </div>
@@ -44,7 +44,7 @@
 <div>
   <app-users-table
     [users]="users"
-    (userDeleted)="onDelete($event)"
+    (userDeleted)="confirmDelete($event)"
     (userEdited)="onEdit($event)"
   ></app-users-table>
 </div>

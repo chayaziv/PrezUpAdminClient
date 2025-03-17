@@ -7,6 +7,8 @@ import { UsersCardsComponent } from '../users-cards/users-cards.component';
 import { DatePipe } from '@angular/common';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   imports: [
@@ -25,7 +27,7 @@ export class ViewUsersComponent implements OnInit {
     // כאן יהיו המשתמשים (או תקבל את המידע הזה ממסד נתונים או שירות)
   ];
 
-  constructor(public userService: UserService) {}
+  constructor(public userService: UserService, private dialog: MatDialog) {}
   ngOnInit(): void {
     this.userService.users$.subscribe((users) => {
       this.users = users;
@@ -44,8 +46,16 @@ export class ViewUsersComponent implements OnInit {
     return this.users.filter((user) => user.accountStatus === 'Active').length;
   }
   confirmDelete(user: User) {
-    
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '550px',
+      data: { name: user.name },
+    });
 
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'yes') {
+        this.onDelete(user);
+      }
+    });
   }
   onEdit(user: User) {
     // פעולה לעריכת משתמש (לדוגמה, ניווט לעמוד עריכת משתמש)
@@ -53,6 +63,6 @@ export class ViewUsersComponent implements OnInit {
   }
   onDelete(user: User) {
     // פעולה למחיקה (לדוגמה, קריאה לשירות מחיקה)
-    console.log('Delete user', user);
+    console.log('view users Delete user', user);
   }
 }

@@ -5,6 +5,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 @Component({
   selector: 'app-users-cards',
   imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule],
@@ -16,7 +18,7 @@ export class UsersCardsComponent {
   @Output() userDeleted = new EventEmitter<User>();
   @Output() userEdited = new EventEmitter<User>();
 
-  constructor(public userService: UserService) {}
+  constructor(public userService: UserService, private dialog: MatDialog) {}
 
   expanded = false;
 
@@ -27,14 +29,11 @@ export class UsersCardsComponent {
   }
 
   onEdit(user: User) {
-   
     this.userEdited.emit(user);
   }
-  confirmDelete(user: User) {
-    // הגדרת פעולה לאישור מחיקה
-  }
+
   onDelete(user: User) {
-   
     this.userDeleted.emit(user);
+    console.log('user-cards onDelete', user);
   }
 }

@@ -1,0 +1,46 @@
+mat-dialog-content {
+  font-size: 16px;
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+.dialog-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  /* margin-top: 20px; */
+}
+
+button {
+  min-width: 100px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-right: 20px;
+  transition: 0.3s ease-in-out;
+  
+}
+
+.confirm-btn {
+  background-color: #d32f2f;
+  color: white;
+  border: none;
+}
+
+.confirm-btn:hover {
+  background-color: #b71c1c;
+}
+
+.cancel-btn {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.cancel-btn:hover {
+  background-color: #e0e0e0;
+}
