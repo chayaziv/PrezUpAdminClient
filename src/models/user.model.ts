@@ -15,3 +15,17 @@ export class User {
     public accountStatus: string
   ) {}
 }
+
+export const initUser: User = new User(
+  0,
+  { id: 1, roleName: 'user' },
+  '',
+  '',
+  '',
+  '',
+  '',
+  0,
+  false,
+  false,
+  ''
+);

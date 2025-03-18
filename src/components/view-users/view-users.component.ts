@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user.model';
+import { initUser, User } from '../../models/user.model';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { UsersTableComponent } from '../users-table/users-table.component';
 import { UserService } from '../../services/user.service';
@@ -24,9 +24,7 @@ import { UserFormComponent } from '../user-form/user-form.component';
   styleUrl: './view-users.component.css',
 })
 export class ViewUsersComponent implements OnInit {
-  users: User[] = [
-    // כאן יהיו המשתמשים (או תקבל את המידע הזה ממסד נתונים או שירות)
-  ];
+  users: User[] = [];
 
   constructor(public userService: UserService, private dialog: MatDialog) {}
   ngOnInit(): void {
@@ -37,7 +35,7 @@ export class ViewUsersComponent implements OnInit {
     this.userService.loadUsers();
   }
   lastUpdated = new Date();
-  displayAsCards = true; // משתנה שמווסת את התצוגה (כרטיסים או טבלה)
+  displayAsCards = true;
 
   toggleView() {
     this.displayAsCards = !this.displayAsCards;
@@ -80,5 +78,25 @@ export class ViewUsersComponent implements OnInit {
   onDelete(user: User) {
     // פעולה למחיקה (לדוגמה, קריאה לשירות מחיקה)
     this.userService.deleteUser(user.id);
+  }
+
+  openAddUserDialog() {
+    const dialogRef = this.dialog.open(UserFormComponent, {
+      data: { isEdit: false }, // מציינים שזה לא בעריכת משתמש קיים
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result && result.action === 'save') {
+        const newUser: User = {
+          ...initUser,
+          ...result.data,
+          role: {
+            id: result.data.role === 'admin' ? 2 : 1,
+            roleName: result.data.role,
+          },
+        };
+        this.userService.addUser(newUser);
+      }
+    });
   }
 }

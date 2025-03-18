@@ -18,6 +18,7 @@
 
     
   </div>
+  <div>
   <button
       mat-fab
       color="accent"
@@ -26,6 +27,14 @@
     >
       <mat-icon>{{ displayAsCards ? "table_chart" : "view_module" }}</mat-icon>
     </button>
+    <button
+    mat-fab
+    color="primary"
+    class="add-user-btn"
+    (click)="openAddUserDialog()"
+  >
+    <mat-icon>add</mat-icon>
+  </button></div>
 </mat-toolbar>
 
 <div>

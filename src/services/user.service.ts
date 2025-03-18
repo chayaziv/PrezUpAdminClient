@@ -19,7 +19,6 @@ export class UserService {
   }
 
   loadUsers() {
-  
     this.http.get<UsersResponse<User>>('users').subscribe(
       (response) => {
         this.usersSubject.next(response.data);
@@ -52,6 +51,18 @@ export class UserService {
       },
       (error) => {
         console.error('Error deleting user:', error);
+      }
+    );
+  }
+  addUser(user: User) {
+    console.log('adding user', user);
+    this.http.post('users', user).subscribe(
+      (response) => {
+        console.log('User added successfully:', response);
+        this.loadUsers();
+      },
+      (error) => {
+        console.error('Error adding user:', error);
       }
     );
   }

@@ -59,7 +59,7 @@ export class UserFormComponent {
       ],
       password: [
         { value: data.user?.password || '', disabled: this.isEdit },
-        [Validators.required, Validators.minLength(6)],
+        [Validators.required],
       ],
       role: [data.user?.role.roleName],
       accountStatus: [data.user?.accountStatus],
