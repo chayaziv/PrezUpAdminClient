@@ -1,84 +1,9 @@
-<!-- <div class="overlay">
-  <div class="form-container">
-    <h2>{{ isEdit ? "Edit User" : "Add User" }}</h2>
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()"> -->
-<!-- הצגת שם המשתמש רק במקרה של עריכה -->
-<!-- @if(!isEdit){
-      <mat-form-field appearance="fill">
-        <mat-label>Full Name</mat-label>
-        <input matInput formControlName="name" />
-        @if(userForm.get('name')?.invalid && userForm.get('name')?.touched) {
-        <mat-error>Name is required.</mat-error>
-        }
-      </mat-form-field>
-      } @if(isEdit){
-      <div class="readonly-field">
-        <strong>Full Name:</strong> {{ user?.name }}
-      </div>
-      } -->
 
-<!-- הצגת אימייל -->
-<!-- <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput type="email" formControlName="email" />
-        @if(userForm.get('email')?.invalid && userForm.get('email')?.touched) {
-        <mat-error>Valid email is required.</mat-error>
-        }
-      </mat-form-field> -->
-
-<!-- הצגת סיסמה רק במקרה של הוספה -->
-<!-- <mat-form-field *ngIf="!isEdit" appearance="fill">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" formControlName="password" />
-        @if(userForm.get('password')?.invalid &&
-        userForm.get('password')?.touched) {
-        <mat-error>Password is required.</mat-error>
-        }
-      </mat-form-field> -->
-
-<!-- תפקיד -->
-<!-- <mat-form-field appearance="fill">
-          <mat-label>Role</mat-label>
-          <mat-select formControlName="role">
-            <mat-option *ngFor="let role of roles" [value]="role">
-              {{ role }}
-            </mat-option>
-          </mat-select>
-          @if(userForm.get('role')?.invalid && userForm.get('role')?.touched) {
-            <mat-error>Role is required.</mat-error>
-          }
-        </mat-form-field> -->
-
-<!-- סטטוס חשבון -->
-<!-- <mat-form-field appearance="fill">
-        <mat-label>Account Status</mat-label>
-        <mat-select formControlName="accountStatus">
-          <mat-option value="Active">Active</mat-option>
-          <mat-option value="Inactive">Inactive</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <div class="actions">
-        <button
-          mat-raised-button
-          color="primary"
-          type="submit"
-          [disabled]="userForm.invalid"
-        >
-          {{ isEdit ? "Save Changes" : "Add User" }}
-        </button>
-        <button mat-raised-button color="warn" (click)="onCancel()">
-          Cancel
-        </button>
-      </div>
-    </form>
-  </div>
-</div> -->
 <div class="form-container">
   <h2>{{ isEdit ? "Edit User" : "Add User" }}</h2>
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <!-- הצגת שם המשתמש רק במקרה של הוספה -->
-    @if (!isEdit) {
+  <form [formGroup]="userForm">
+    
+   
     <mat-form-field appearance="fill">
       <mat-label>Full Name</mat-label>
       <input matInput formControlName="name" />
@@ -86,16 +11,8 @@
       <mat-error>Name is required.</mat-error>
       }
     </mat-form-field>
-    }
+    
 
-    <!-- הצגת שם משתמש כטקסט במקרה של עריכה -->
-    @if (isEdit) {
-    <div class="readonly-field">
-      <strong>Full Name:</strong> {{ data.user?.name }}
-    </div>
-    }
-
-    <!-- הצגת אימייל -->
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
       <input matInput type="email" formControlName="email" />
@@ -104,59 +21,51 @@
       }
     </mat-form-field>
 
-    <!-- הצגת סיסמה רק במקרה של הוספה -->
-    @if (!isEdit) {
+    
     <mat-form-field appearance="fill">
       <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="password" />
+      <input matInput formControlName="password"  />
       @if(userForm.get('password')?.invalid &&
       userForm.get('password')?.touched) {
       <mat-error>Password is required.</mat-error>
       }
     </mat-form-field>
-    }
 
-    <!-- תפקיד (רשימה נפתחת) -->
     <mat-form-field appearance="fill">
       <mat-label>Role</mat-label>
       <mat-select formControlName="role">
-        <mat-option  [value]="roleAdmin">
-            {{ roleAdmin }}
-          </mat-option>
-          <mat-option  [value]="roleUser">
-            {{ roleUser }}
-          </mat-option>
-        <!-- @for(let role of roles;track by role){ {
-            <mat-option  [value]="role">
-                {{ role }}
-              </mat-option>
-        } -->
-        
+        <mat-option [value]="roleAdmin">
+          {{ roleAdmin }}
+        </mat-option>
+        <mat-option [value]="roleUser">
+          {{ roleUser }}
+        </mat-option>
       </mat-select>
       @if(userForm.get('role')?.invalid && userForm.get('role')?.touched) {
       <mat-error>Role is required.</mat-error>
       }
     </mat-form-field>
 
-    <!-- סטטוס חשבון -->
+
     <mat-form-field appearance="fill">
       <mat-label>Account Status</mat-label>
       <mat-select formControlName="accountStatus">
         <mat-option value="Active">Active</mat-option>
-        <mat-option value="Inactive">Inactive</mat-option>
+        <mat-option value="inActive">Inactive</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <!-- כפתורים -->
     <mat-dialog-actions align="end">
       <button
         mat-raised-button
         color="primary"
         type="submit"
         [disabled]="userForm.invalid"
+        (click)="onSave()"
       >
         {{ isEdit ? "Save Changes" : "Add User" }}
       </button>
+
       <button mat-raised-button color="warn" (click)="onCancel()">
         Cancel
       </button>

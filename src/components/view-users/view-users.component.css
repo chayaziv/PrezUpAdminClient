@@ -2,6 +2,7 @@ mat-toolbar {
     display: flex;
     justify-content: space-between;
     padding: 10px;
+   
   }
   
   button {
@@ -35,6 +36,7 @@ mat-toolbar {
     align-items: center;
     gap: 20px; /* מוסיף רווחים בין האלמנטים */
     font-size: 14px;
+   
   }
   
   .summary-container span {
@@ -46,17 +48,18 @@ mat-toolbar {
     color: #ffffffcc;
   }
   .toggle-view-btn {
-    position: absolute;
+    /* position: absolute;
     top: 10px;
-    right: 10px;
+    right: 10px; */
     width: 48px;
     height: 48px;
-    display: flex;
+    margin-right: 20px;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; */
     transition: transform 0.2s ease-in-out, background-color 0.3s;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    border-radius: 50%;
+    border-radius: 30%;
   }
   
   .toggle-view-btn:hover {

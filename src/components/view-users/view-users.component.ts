@@ -35,7 +35,6 @@ export class ViewUsersComponent implements OnInit {
     });
 
     this.userService.loadUsers();
-    console.log(this.users);
   }
   lastUpdated = new Date();
   displayAsCards = true; // משתנה שמווסת את התצוגה (כרטיסים או טבלה)
@@ -60,19 +59,26 @@ export class ViewUsersComponent implements OnInit {
   }
   onEdit(user: User) {
     const dialogRef = this.dialog.open(UserFormComponent, {
-      
       data: { user, isEdit: true },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        console.log('User updated:', result);
-        // הוספת לוגיקה לעדכון המשתמש ברשימה
+      if (result && result.action === 'save') {
+        const updatedUser: User = {
+          ...user,
+          ...result.data,
+          role: {
+            id: result.data.role === 'admin' ? 2 : 1,
+            roleName: result.data.role,
+          },
+        };
+
+        this.userService.updateUser(updatedUser);
       }
     });
   }
   onDelete(user: User) {
     // פעולה למחיקה (לדוגמה, קריאה לשירות מחיקה)
-    console.log('view users Delete user', user);
+    this.userService.deleteUser(user.id);
   }
 }

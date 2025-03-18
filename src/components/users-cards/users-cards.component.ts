@@ -6,10 +6,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+
+import { MatChipsModule } from '@angular/material/chips';
 @Component({
   selector: 'app-users-cards',
-  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule],
+  imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule,MatChipsModule],
   templateUrl: './users-cards.component.html',
   styleUrl: './users-cards.component.css',
 })
@@ -34,6 +35,6 @@ export class UsersCardsComponent {
 
   onDelete(user: User) {
     this.userDeleted.emit(user);
-    console.log('user-cards onDelete', user);
+  
   }
 }

@@ -19,7 +19,7 @@ export class UserService {
   }
 
   loadUsers() {
-    console.log('loading users');
+  
     this.http.get<UsersResponse<User>>('users').subscribe(
       (response) => {
         this.usersSubject.next(response.data);
@@ -27,6 +27,31 @@ export class UserService {
       },
       (error) => {
         console.error('Error loading users:', error);
+      }
+    );
+  }
+  updateUser(user: User) {
+    console.log('updating user', user.accountStatus);
+    this.http.put(`users/${user.id}`, user).subscribe(
+      (response) => {
+        console.log('User updated successfully:', response);
+        this.loadUsers();
+      },
+      (error) => {
+        console.error('Error updating user:', error);
+      }
+    );
+  }
+
+  deleteUser(userId: number) {
+    console.log('deleting user', userId);
+    this.http.delete(`users/${userId}`).subscribe(
+      (response) => {
+        console.log('User deleted successfully:', response);
+        this.loadUsers();
+      },
+      (error) => {
+        console.error('Error deleting user:', error);
       }
     );
   }

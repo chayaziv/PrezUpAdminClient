@@ -26,7 +26,7 @@ export class UsersTableComponent {
   @Output() userDeleted = new EventEmitter<User>();
   @Output() userEdited = new EventEmitter<User>();
   constructor() {
-    console.log('users:::', this.users);
+   
   }
   displayedColumns: string[] = [
     'id',
@@ -43,13 +43,13 @@ export class UsersTableComponent {
 
   onEdit(user: User) {
     // הגדרת פעולה לעריכה (לדוגמה, ניווט לעמוד עריכת משתמש)
-    console.log('Edit user', user);
+   
     this.userEdited.emit(user);
   }
 
   onDelete(user: User) {
     // הגדרת פעולה למחיקה (לדוגמה, קריאה לשירות מחיקה)
-    console.log('Delete user', user);
+  
     this.userDeleted.emit(user);
   }
 }

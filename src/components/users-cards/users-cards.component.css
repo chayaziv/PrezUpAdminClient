@@ -1,59 +1,72 @@
+.users-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* תומך ב-2 טורים */
+  gap: 20px;
+  padding: 20px;
+}
 
-   .users-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* תומך ב-2 טורים */
-    gap: 20px;
-    padding: 20px;
-  }
-  
-  .user-card {
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-  }
-  
+.user-card {
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
 
+.user-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #3f51b5;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: white;
+}
+
+.status {
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.active {
+  color: #388e3c;
+  background: #c8e6c9;
+}
+
+.inactive {
+  color: #d32f2f;
+  background: #ffcdd2;
+}
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+}
+mat-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+}
+
+.action-buttons {
+  display: flex;
+  margin-left: auto; 
+  gap: 8px; 
+}
+.admin-icon {
+
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 20px;
+  display: inline-block;
+  color: rgb(249, 127, 13);
+  background-color: #f0d4ab; /* צבע כתום */
   
-  .user-avatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #3f51b5;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    color: white;
-  }
-  
-  .status {
-    font-weight: bold;
-    padding: 4px 8px;
-    border-radius: 4px;
-    display: inline-block;
-  }
-  
-  .active {
-    color: #388e3c;
-    background: #c8e6c9;
-  }
-  
-  .inactive {
-    color: #d32f2f;
-    background: #ffcdd2;
-  }
-  
-  mat-card-actions {
-    display: flex;
-    justify-content: center;
-  }
-  mat-card-header {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* ריווח בין האלמנטים */
-  }
-  
-  .action-buttons {
-    display: flex;
-    margin-left: auto; /* מצמיד את הכפתורים לצד ימין */
-    gap: 8px; /* ריווח בין הכפתורים */
-  }
+}
+
+

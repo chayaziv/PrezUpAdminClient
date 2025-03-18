@@ -39,7 +39,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 export class UserFormComponent {
   userForm: FormGroup;
   isEdit: boolean;
-  roles = ['admin', 'user']; // רשימת תפקידים לדוגמה
   roleUser = 'user';
   roleAdmin = 'admin';
   constructor(
@@ -59,67 +58,23 @@ export class UserFormComponent {
         [Validators.required, Validators.email],
       ],
       password: [
-        this.isEdit ? '' : '',
-        this.isEdit ? [] : [Validators.required, Validators.minLength(6)],
+        { value: data.user?.password || '', disabled: this.isEdit },
+        [Validators.required, Validators.minLength(6)],
       ],
-      role: [this.roleUser || '', Validators.required],
-      accountStatus: [data.user?.accountStatus || 'Active'],
+      role: [data.user?.role.roleName],
+      accountStatus: [data.user?.accountStatus],
     });
   }
-
-  onSubmit() {
+  onSave() {
     if (this.userForm.valid) {
-      this.dialogRef.close(this.userForm.getRawValue());
+      this.dialogRef.close({
+        action: 'save',
+        data: this.userForm.getRawValue(),
+      });
     }
   }
-
   onCancel() {
-    this.dialogRef.close();
+    console.log('cancel');
+    this.dialogRef.close({ action: 'cancel' });
   }
-
-  // @Input() user: User | null = null;
-  // @Output() userSaved = new EventEmitter<User>();
-  // @Output() cancel = new EventEmitter<void>();
-
-  // userForm: FormGroup;
-  // isEdit: boolean = false;
-  // roles = ['Admin', 'Instructor', 'Student']; // רשימה לדוגמה
-
-  // constructor(private fb: FormBuilder) {
-  //   this.userForm = this.fb.group({
-  //     name: ['', Validators.required],
-  //     email: ['', [Validators.required, Validators.email]],
-  //     password: [
-  //       '',
-  //       this.isEdit ? [] : [Validators.required, Validators.minLength(6)],
-  //     ],
-  //     role: ['', Validators.required],
-  //     accountStatus: ['Active'],
-  //   });
-  // }
-
-  // ngOnInit() {
-  //   if (this.user) {
-  //     this.isEdit = true;
-  //     this.userForm.patchValue({
-  //       email: this.user.email,
-  //       // role: this.user.role,
-  //       accountStatus: this.user.accountStatus,
-  //     });
-
-  //     // מנקה את השדות שלא צריכים להיות זמינים בעריכה
-  //     this.userForm.get('name')?.disable();
-  //     this.userForm.get('password')?.disable();
-  //   }
-  // }
-
-  // onSubmit() {
-  //   if (this.userForm.valid) {
-  //     this.userSaved.emit(this.userForm.getRawValue());
-  //   }
-  // }
-
-  // onCancel() {
-  //   this.cancel.emit();
-  // }
 }
