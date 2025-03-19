@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { HttpClient } from '@angular/common/http';
-interface UsersResponse<T> {
-  data: T[];
-}
+import { ResponseAPI } from '../models/response.model';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -19,7 +18,7 @@ export class UserService {
   }
 
   loadUsers() {
-    this.http.get<UsersResponse<User>>('users').subscribe(
+    this.http.get<ResponseAPI<User[]>>('users').subscribe(
       (response) => {
         this.usersSubject.next(response.data);
         console.log('users loaded', response.data);

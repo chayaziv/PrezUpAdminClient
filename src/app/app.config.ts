@@ -7,12 +7,12 @@ import {
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
-import { authInterceptor } from './interceptors/auth.interceptor';
+import { authInterceptor } from '../interceptors/auth.interceptor';
 import {
   provideClientHydration,
   withEventReplay,
 } from '@angular/platform-browser';
-import { baseUrlInterceptor } from './interceptors/base-url.interceptor';
+import { baseUrlInterceptor } from '../interceptors/base-url.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,9 +20,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(withEventReplay()),
     // provideHttpClient(withInterceptors([authInterceptor])),
-    provideHttpClient(
-     
-      withInterceptors([authInterceptor,baseUrlInterceptor])
-    ),
+    provideHttpClient(withInterceptors([authInterceptor, baseUrlInterceptor])),
   ],
 };

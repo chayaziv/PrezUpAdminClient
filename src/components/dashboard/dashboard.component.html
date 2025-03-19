@@ -1,0 +1,65 @@
+<div class="dashboard-container">
+  <h2>Admin Dashboard</h2>
+
+  <div *ngIf="isLoading" class="loading">Loading data...</div>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <div *ngIf="dashboardData">
+    <!-- סטטיסטיקות משתמשים -->
+    <div class="card">
+      <h3>Users Overview</h3>
+      <p>Total Users: {{ dashboardData.userStatistics.totalUsers }}</p>
+      <p>Active Users: {{ dashboardData.userStatistics.activeUsers }}</p>
+      <p>Inactive Users: {{ dashboardData.userStatistics.inactiveUsers }}</p>
+    </div>
+
+    <!-- התפלגות תפקידים -->
+    <div class="card">
+      <h3>Role Distribution</h3>
+      <ul>
+        <li *ngFor="let role of dashboardData.rolesDistribution">
+          {{ role.roleName }}: {{ role.userCount }} users
+        </li>
+      </ul>
+    </div>
+
+    <!-- טופ משתמשים -->
+    <div class="card">
+      <h3>Top Users</h3>
+      <table>
+        <tr>
+          <th>Name</th>
+          <th>Presentations</th>
+        </tr>
+        <tr *ngFor="let user of dashboardData.topUsers">
+          <td>{{ user.userName }}</td>
+          <td>{{ user.presentationCount }}</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- גרף פרזנטציות לפי חודש -->
+    <div class="card">
+      <h3>Monthly Presentations</h3>
+      <ngx-charts-bar-vertical
+        [results]="dashboardData.monthlyPresentations"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="false"
+        [showDataLabel]="true"
+        [scheme]="'cool'"
+      ></ngx-charts-bar-vertical>
+    </div>
+
+    <!-- פעילות לא רגילה -->
+    <div class="card">
+      <h3>Unusual Activity</h3>
+      <ul>
+        <li *ngFor="let activity of dashboardData.unusualActivities">
+          {{ activity.userName }} -
+          {{ activity.presentationCount }} presentations
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
