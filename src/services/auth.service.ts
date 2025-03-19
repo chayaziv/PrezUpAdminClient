@@ -23,6 +23,7 @@ export class AuthService {
           sessionStorage.setItem('token', res.data.token);
         }
         this.isAuthSubject.next(true);
+        this.router.navigate(['/']);
       },
       (error) => {
         alert('Error:' + error.message);

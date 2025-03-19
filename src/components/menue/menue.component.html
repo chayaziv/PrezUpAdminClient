@@ -1,45 +1,35 @@
-<!-- <button routerLink="/login">
-  <span>login </span>
-</button>
-<button routerLink="/">
-  <span>home </span>
-</button>
+<mat-toolbar class="menu">
+  <span class="app-name">PrezUp Dashboard</span>
+  <div class="menu-items">
+    <button  routerLink="/" class="menu-item">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
+    @if (isAuth) {
+      <ng-container >
+        <button  mat-raised-button routerLink="/users" class="menu-item">
+          <mat-icon>group</mat-icon>
+          <span>Users</span>
+        </button>
+        <button  mat-raised-button routerLink="/dashboard" class="menu-item">
+          <mat-icon>dashboard</mat-icon>
+          <span>Dashboard</span>
+        </button>
+        <button  mat-raised-button (click)="logout()" class="menu-item">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Logout</span>
+        </button>
+      </ng-container>
+    }
 
-<button routerLink="/users">
-  <span>users </span>
-</button>
-
-<button mat-menu-item (click)="logout()">
-  <span>Logout</span>
-</button> -->
-<mat-toolbar color="primary">
-  <button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>My App</span>
+    @if(!isAuth) {
+      <ng-container >
+        <button  mat-raised-button routerLink="/login" class="menu-item">
+          <mat-icon>login</mat-icon>
+          <span>Login</span>
+        </button>
+      </ng-container>
+    }
+    
+  </div>
 </mat-toolbar>
-
-<mat-menu #menu="matMenu">
-  <button mat-menu-item routerLink="/login">
-    <mat-icon>login</mat-icon>
-    <span>Login</span>
-  </button>
-  <button mat-menu-item routerLink="/">
-    <mat-icon>home</mat-icon>
-    <span>Home</span>
-  </button>
-  <button mat-menu-item routerLink="/users">
-    <mat-icon>group</mat-icon>
-    <span>Users</span>
-  </button>
-
-  <button mat-menu-item routerLink="/dashboard">
-    <mat-icon>dashboard</mat-icon>
-    <span>Dashboard</span>
-  </button>
-
-  <button mat-menu-item (click)="logout()">
-    <mat-icon>exit_to_app</mat-icon>
-    <span>Logout</span>
-  </button>
-</mat-menu>
