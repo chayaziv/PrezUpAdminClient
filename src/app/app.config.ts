@@ -1,10 +1,11 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
+// import { provideAnimationsAsync } from '@angular/platform-browser/animations';
+import {BrowserModule} from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 import {
   provideHttpClient,
-  withFetch,
   withInterceptors,
 } from '@angular/common/http';
 import { authInterceptor } from '../interceptors/auth.interceptor';
@@ -21,5 +22,6 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     // provideHttpClient(withInterceptors([authInterceptor])),
     provideHttpClient(withInterceptors([authInterceptor, baseUrlInterceptor])),
+
   ],
 };

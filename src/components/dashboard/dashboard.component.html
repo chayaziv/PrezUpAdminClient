@@ -1,65 +1,93 @@
 <div class="dashboard-container">
-  <h2>Admin Dashboard</h2>
+  <mat-card class="dashboard-header">
+    <h2>Admin Dashboard</h2>
+  </mat-card>
+  @if(isLoading){
+  <div class="loading">
+    <mat-spinner diameter="50"></mat-spinner> Loading data...
+  </div>
+  } @if(errorMessage){
+  <div class="error"><mat-icon>error_outline</mat-icon> {{ errorMessage }}</div>
+  } @if(dashboardData){
+  <div>
+    <div class="grid-container">
+      <!-- Users Overview Card -->
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-icon mat-card-icon>group</mat-icon>
+          <mat-card-title>Users Overview</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Total Users: {{ dashboardData.userStatistics.totalUsers }}</p>
+          <p>Active Users: {{ dashboardData.userStatistics.activeUsers }}</p>
+          <p>
+            Inactive Users: {{ dashboardData.userStatistics.inactiveUsers }}
+          </p>
+        </mat-card-content>
+        <ngx-charts-pie-chart
+          [results]="usersPieData"
+          [view]="[800, 400]"
+          [legend]="true"
+          [labels]="true"
+          [doughnut]="true"
+          [scheme]="colorScheme"
+        >
+        </ngx-charts-pie-chart>
+      </mat-card>
 
-  <div *ngIf="isLoading" class="loading">Loading data...</div>
-  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+      <!-- Roles Distribution Card -->
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-icon mat-card-icon>account_balance</mat-icon>
+          <mat-card-title>Role Distribution</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <ul>
+            @for( role of dashboardData.rolesDistribution ;track role.roleName)
+            {
+            <li>
+              <mat-icon>person</mat-icon> {{ role.roleName }}:
+              {{ role.userCount }} users
+            </li>
+            }
+          </ul>
+        </mat-card-content>
+        <ngx-charts-bar-vertical
+          [results]="rolesBarData"
+          [view]="[800, 400]"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [showDataLabel]="true"
+          [scheme]="colorScheme"
+        >
+        </ngx-charts-bar-vertical>
+      </mat-card>
 
-  <div *ngIf="dashboardData">
-    <!-- סטטיסטיקות משתמשים -->
-    <div class="card">
-      <h3>Users Overview</h3>
-      <p>Total Users: {{ dashboardData.userStatistics.totalUsers }}</p>
-      <p>Active Users: {{ dashboardData.userStatistics.activeUsers }}</p>
-      <p>Inactive Users: {{ dashboardData.userStatistics.inactiveUsers }}</p>
-    </div>
+      <!-- Top Users Card -->
+      <mat-card class="card">
+        <mat-card-header>
+          <mat-icon mat-card-icon>star</mat-icon>
+          <mat-card-title>Top Users</mat-card-title>
+        </mat-card-header>
 
-    <!-- התפלגות תפקידים -->
-    <div class="card">
-      <h3>Role Distribution</h3>
-      <ul>
-        <li *ngFor="let role of dashboardData.rolesDistribution">
-          {{ role.roleName }}: {{ role.userCount }} users
-        </li>
-      </ul>
-    </div>
+        
+        
 
-    <!-- טופ משתמשים -->
-    <div class="card">
-      <h3>Top Users</h3>
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Presentations</th>
-        </tr>
-        <tr *ngFor="let user of dashboardData.topUsers">
-          <td>{{ user.userName }}</td>
-          <td>{{ user.presentationCount }}</td>
-        </tr>
-      </table>
-    </div>
-
-    <!-- גרף פרזנטציות לפי חודש -->
-    <div class="card">
-      <h3>Monthly Presentations</h3>
-      <ngx-charts-bar-vertical
-        [results]="dashboardData.monthlyPresentations"
-        [xAxis]="true"
-        [yAxis]="true"
-        [legend]="false"
-        [showDataLabel]="true"
-        [scheme]="'cool'"
-      ></ngx-charts-bar-vertical>
-    </div>
-
-    <!-- פעילות לא רגילה -->
-    <div class="card">
-      <h3>Unusual Activity</h3>
-      <ul>
-        <li *ngFor="let activity of dashboardData.unusualActivities">
-          {{ activity.userName }} -
-          {{ activity.presentationCount }} presentations
-        </li>
-      </ul>
+        <ngx-charts-bar-vertical
+          [results]="topUsersLineData"
+          [view]="[1000, 600]"
+          [xAxis]="true"
+          [yAxis]="true"
+          [legend]="true"
+          [showDataLabel]="true"
+          [scheme]="colorScheme"
+          xAxisLabel="'User ID'"
+          yAxisLabel="'Number of Presentations'"
+        >
+        </ngx-charts-bar-vertical>
+      </mat-card>
     </div>
   </div>
+  }
 </div>

@@ -1,51 +1,80 @@
 .dashboard-container {
-    max-width: 1200px;
-    margin: 0 auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
   }
   
-  h2 {
+  .dashboard-header {
     text-align: center;
-    color: #333;
-  }
-  
-  .loading {
-    text-align: center;
-    font-size: 18px;
-    color: #555;
-  }
-  
-  .error {
-    text-align: center;
-    color: red;
-    font-weight: bold;
+    /* background-color: #aab0d0;
+    color: white; */
+    padding: 20px;
   }
   
   .card {
-    background: #ffffff;
+    background-color: #fff;
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    margin: 15px 0;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   }
   
-  h3 {
-    margin-bottom: 10px;
-    color: #444;
+  .card-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .card-header mat-icon {
+    margin-right: 10px;
+  }
+  
+  .grid-container {
+    /* display: grid;
+
+    grid-template-columns: repeat(3, 1fr); */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .grid-container mat-card {
+    border-radius: 10px;
+  }
+  
+  .loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #3f51b5;
+  }
+  
+  .error {
+    color: red;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .error mat-icon {
+    font-size: 24px;
   }
   
   table {
     width: 100%;
-    border-collapse: collapse;
+    margin-top: 20px;
   }
   
   th, td {
+    text-align: left;
     padding: 8px;
-    border-bottom: 1px solid #ddd;
   }
   
   th {
-    background: #f4f4f4;
-    text-align: left;
+    background-color: #f1f1f1;
+  }
+  
+  mat-spinner {
+    margin-right: 10px;
   }
   

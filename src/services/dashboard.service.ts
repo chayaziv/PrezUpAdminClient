@@ -13,8 +13,8 @@ export class DashboardService {
   // );
   // public dashboard$ = this.dashbordSubject.asObservable();
   constructor(private http: HttpClient) {}
-  getDashboardData(): Observable<AdminDashboard> {
-    return this.http.get<AdminDashboard>('admin/dashboard');
+  getDashboardData(): Observable<ResponseAPI<AdminDashboard>> {
+    return this.http.get<ResponseAPI<AdminDashboard>>('admin/dashboard');
   }
   // getDashboardData() {
   //   this.http.get<ResponseAPI<AdminDashboard>>('admin/dashboard').subscribe(
